@@ -1,5 +1,3 @@
-// Copyright 2020 Hypergiant, LLC
-
 variable "name" {
   type        = string
   description = "Name of autoscaling group"
@@ -8,12 +6,16 @@ variable "name" {
 variable "gpu_enabled" {
   type        = bool
   description = "Whether to use GPU AMI and tags"
-  default     = false
 }
 
 variable "cluster_name" {
   type        = string
   description = "Name of Kubernetes cluster"
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "Subnet ID to use for autoscaling group"
 }
 
 variable "min_size" {
