@@ -2,6 +2,7 @@
 
 module "nodepools" {
   for_each = var.subnet_ids
+  source   = "./modules/node-pool"
 
   name                        = var.name
   gpu_enabled                 = var.gpu_enabled
