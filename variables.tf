@@ -8,6 +8,7 @@ variable "name" {
 variable "gpu_enabled" {
   type        = bool
   description = "Whether to use GPU AMI and tags"
+  default     = false
 }
 
 variable "cluster_name" {
