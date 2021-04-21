@@ -37,7 +37,11 @@ variable "associate_public_ip_address" {
 variable "key_name" {
   type        = string
   description = "SSH key name. Optional."
-  default     = null
+}
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "Subnet IDs to deploy worker pool into. Availability zones are inferred from subnets. One autoscaling worker pool per subnet."
 }
 
 variable "instance_type" {
