@@ -16,7 +16,7 @@ locals {
   user_data = <<EOF
     #!/bin/bash
     set -o xtrace
-    /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup-image=,${data.aws_ssm_parameter.eks_ami.value},${var.name}-az=${data.aws_subnet.this.availability_zone}'
+    /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup-image=${data.aws_ssm_parameter.eks_ami.value},${var.name}-az=${data.aws_subnet.this.availability_zone}'
     EOF
   base_tags = [
     {
