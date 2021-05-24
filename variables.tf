@@ -77,11 +77,6 @@ variable "role_name" {
   description = "The role that should be applied"
 }
 
-variable "ssh_key_name" {
-  type = string
-  description = "The name of the ssk key pair to use"
-}
-
 variable "iam_instance_profile" {
   type = string
   description = "The name of the IAM Profile to utilize"

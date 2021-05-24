@@ -16,4 +16,7 @@ module "nodepools" {
   subnet_id                   = each.key
   volume_size                 = var.volume_size
   volume_type                 = var.volume_type
+  cluster_autoscaler          = var.cluster_autoscaler
+  role_name                   = var.role_name
+  iam_instance_profile        = var.iam_instance_profile
 }
