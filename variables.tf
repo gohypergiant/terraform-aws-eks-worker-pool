@@ -65,3 +65,24 @@ variable "volume_type" {
   description = "AWS EBS volume type"
   default     = "gp2"
 }
+
+variable "cluster_autoscaler" {
+  type = bool
+  description = "whether to provide auto-scaling services"
+  default = false
+}
+
+variable "role_name" {
+  type = string
+  description = "The role that should be applied"
+}
+
+variable "ssh_key_name" {
+  type = string
+  description = "The name of the ssk key pair to use"
+}
+
+variable "iam_instance_profile" {
+  type = string
+  description = "The name of the IAM Profile to utilize"
+}
