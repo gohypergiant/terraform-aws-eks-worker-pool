@@ -71,7 +71,7 @@ module "nodepool-asg" {
   wait_for_capacity_timeout   = 0
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.ssh_key_name
-  iam_instance_profile        = aws_iam_instance_profile.eks_node_group.name
+  iam_instance_profile        = var.iam_instance_profile
 
   name = "${var.name}-${data.aws_subnet.this.availability_zone}"
 
