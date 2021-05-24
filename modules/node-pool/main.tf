@@ -70,7 +70,7 @@ module "nodepool-asg" {
   desired_capacity            = var.max_size // Set equal to max_size so we don't scale down instances in use
   wait_for_capacity_timeout   = 0
   associate_public_ip_address = var.associate_public_ip_address
-  key_name                    = var.ssh_key_name
+  key_name                    = var.key_name
   iam_instance_profile        = var.iam_instance_profile
 
   name = "${var.name}-${data.aws_subnet.this.availability_zone}"

@@ -84,5 +84,5 @@ variable "ssh_key_name" {
 
 variable "iam_instance_profile" {
   type = string
-  description = "The name of the IAM Profile to utilize"
+  description = "The name of the IAM Profile to utilize3"
 }
