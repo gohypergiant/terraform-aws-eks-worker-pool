@@ -2,21 +2,13 @@
 
 [![Hypergiant](https://i.imgur.com/cLjriJj.jpg)](https://www.hypergiant.com/)
 
-This repository represents the basic skeleton of a Terraform module at Hypergiant.
+This module helps to add worker pools! 
 
 ### What's in the box?
 - Github Actions
 - File structure for your module
 - Unit tests
 - File structure for examples (that will be unit tested)
-
-### What do I do?
-- Change this section
-- Write your module
-- Keep your example in `examples/complete` up to date
-- Add your AWS IAM creds to the repo's secrets so unit tests can run. Use TF Unit Test User in LastPass.
-- Once your base functionality is done and it passes tests, deploy it in Terraform Cloud
-- Update your input and output interfaces using `terraform-docs markdown .` on changes to variables
 
 ## How do you use this Module?
 
