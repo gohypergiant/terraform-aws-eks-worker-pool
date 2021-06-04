@@ -18,20 +18,18 @@ locals {
     set -o xtrace
     /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup-image=${data.aws_ssm_parameter.eks_ami.value},${var.name}-az=${data.aws_subnet.this.availability_zone}'
     EOF
-  cluster_id = [
-    {
+
+  cluster_id = {
       key                 = "kubernetes.io/cluster/${data.aws_eks_cluster.this.id}"
       value               = "owned"
       propagate_at_launch = true
     }
-  ]
-  cluster_name = [
-    {
+  
+  cluster_name = {
       key                 = "eks:cluster-name"
       value               = data.aws_eks_cluster.this.id
       propagate_at_launch = true
     }
-  ]
 
   cluster_autoscaler_tags = var.cluster_autoscaler ? (
     [
@@ -96,5 +94,5 @@ module "nodepool-asg" {
     },
   ]
 
-  tags = flatten(merge(local.cluster_id..., local.cluster_name..., local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags))
+  tags = flatten(merge(local.cluster_id, local.cluster_name, local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags))
 }
