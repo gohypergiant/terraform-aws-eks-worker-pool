@@ -98,5 +98,5 @@ module "nodepool-asg" {
     },
   ]
 
-  tags = flatten(local.cluster_id, local.cluster_name, local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags)
+  tags = flatten(merge(local.cluster_id, local.cluster_name, local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags))
 }
