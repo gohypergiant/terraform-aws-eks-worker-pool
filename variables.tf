@@ -40,7 +40,7 @@ variable "key_name" {
 }
 
 variable "subnet_ids" {
-  type        = list(string)
+  type        = set(string)
   description = "Subnet IDs to deploy worker pool into. Availability zones are inferred from subnets. One autoscaling worker pool per subnet."
 }
 
