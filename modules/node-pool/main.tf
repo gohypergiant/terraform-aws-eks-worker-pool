@@ -31,25 +31,17 @@ locals {
       propagate_at_launch = true
     }
 
-  cluster_autoscaler_tags = var.cluster_autoscaler ? (
-    [
-      {
-        key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
-        value               = "owned"
-        propagate_at_launch = true
-      }
-    ]
-  ) : []
+  cluster_autoscaler_tags = var.cluster_autoscaler ? {
+      key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
+      value               = "owned"
+      propagate_at_launch = true
+    } : {}
 
-  cluster_autoscaler_gpu_tags = var.gpu_enabled ? (
-    [
-      {
-        key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
-        value               = "true"
-        propagate_at_launch = true
-      }
-    ]
-  ) : []
+  cluster_autoscaler_gpu_tags = var.gpu_enabled ? {
+      key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
+      value               = "true"
+      propagate_at_launch = true
+    } : {}
 }
 
 resource "aws_iam_instance_profile" "this" {
@@ -94,5 +86,5 @@ module "nodepool-asg" {
     },
   ]
 
-  tags = flatten(local.cluster_id, local.cluster_name, local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags)
+  tags = flatten(merge(local.cluster_id, local.cluster_name, local.cluster_autoscaler_tags, local.cluster_autoscaler_gpu_tags))
 }
