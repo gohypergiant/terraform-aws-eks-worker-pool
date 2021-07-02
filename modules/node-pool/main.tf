@@ -54,7 +54,6 @@ module "nodepool-asg" {
   version = "~> 4.0"
 
   # Auto scaling group
-  name                        = var.name
   vpc_zone_identifier         = toset([data.aws_subnet.this.id])
   health_check_type           = "EC2"
   min_size                    = var.min_size
