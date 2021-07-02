@@ -54,7 +54,7 @@ module "nodepool-asg" {
   version = "~> 4.0"
 
   # Auto scaling group
-  asg_name                    = var.name
+  name                        = var.name
   vpc_zone_identifier         = toset([data.aws_subnet.this.id])
   health_check_type           = "EC2"
   min_size                    = var.min_size
@@ -63,7 +63,7 @@ module "nodepool-asg" {
   wait_for_capacity_timeout   = 0
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.key_name
-  iam_instance_profile        = var.iam_instance_profile
+  iam_instance_profile_name   = var.iam_instance_profile
 
   name = "${var.name}-${data.aws_subnet.this.availability_zone}"
 
