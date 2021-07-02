@@ -51,7 +51,7 @@ resource "aws_iam_instance_profile" "this" {
 
 module "nodepool-asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   # Auto scaling group
   asg_name                    = var.name
