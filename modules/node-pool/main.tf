@@ -67,7 +67,9 @@ module "nodepool-asg" {
   name = "${var.name}-${data.aws_subnet.this.availability_zone}"
 
   # Launch configuration
-  lc_name = "${var.name}-${data.aws_subnet.this.availability_zone}"
+  lc_name   = "${var.name}-${data.aws_subnet.this.availability_zone}"
+  use_lc    = true
+  create_lc = true
 
   # Use the SSM because apparently that's how AWS wants you to do it
   image_id = data.aws_ssm_parameter.eks_ami.value
