@@ -20,28 +20,28 @@ locals {
     EOF
 
   cluster_id = {
-      key                 = "kubernetes.io/cluster/${data.aws_eks_cluster.this.id}"
-      value               = "owned"
-      propagate_at_launch = true
-    }
-  
+    key                 = "kubernetes.io/cluster/${data.aws_eks_cluster.this.id}"
+    value               = "owned"
+    propagate_at_launch = true
+  }
+
   cluster_name = {
-      key                 = "eks:cluster-name"
-      value               = data.aws_eks_cluster.this.id
-      propagate_at_launch = true
-    }
+    key                 = "eks:cluster-name"
+    value               = data.aws_eks_cluster.this.id
+    propagate_at_launch = true
+  }
 
   cluster_autoscaler_tags = var.cluster_autoscaler ? {
-      key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
-      value               = "owned"
-      propagate_at_launch = true
-    } : {}
+    key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
+    value               = "owned"
+    propagate_at_launch = true
+  } : {}
 
   cluster_autoscaler_gpu_tags = var.gpu_enabled ? {
-      key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
-      value               = "true"
-      propagate_at_launch = true
-    } : {}
+    key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
+    value               = "true"
+    propagate_at_launch = true
+  } : {}
 }
 
 resource "aws_iam_instance_profile" "this" {
@@ -62,7 +62,7 @@ module "nodepool-asg" {
   wait_for_capacity_timeout   = 0
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.key_name
-  iam_instance_profile_name   = var.iam_instance_profile
+  iam_instance_profile_name   = aws_iam_instance_profile.this.id
 
   name = "${var.name}-${data.aws_subnet.this.availability_zone}"
 
