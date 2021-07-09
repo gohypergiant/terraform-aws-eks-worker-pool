@@ -28,6 +28,12 @@ variable "max_size" {
   default     = 1
 }
 
+variable "desired_capacity" {
+  type        = number
+  description = "Desired size of ASG. If cluster_autoscaler is enabled, may cause fluctiations in node pool size."
+  default     = 1
+}
+
 variable "associate_public_ip_address" {
   type        = bool
   description = "Associate public IP address with ASG instances. Useful for debugging."
