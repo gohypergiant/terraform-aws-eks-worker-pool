@@ -18,5 +18,4 @@ module "nodepools" {
   volume_type                 = var.volume_type
   cluster_autoscaler          = var.cluster_autoscaler
   role_name                   = var.role_name
-  iam_instance_profile        = var.iam_instance_profile
 }

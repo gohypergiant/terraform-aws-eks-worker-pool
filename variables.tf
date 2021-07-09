@@ -67,17 +67,12 @@ variable "volume_type" {
 }
 
 variable "cluster_autoscaler" {
-  type = bool
+  type        = bool
   description = "whether to provide auto-scaling services"
-  default = false
+  default     = false
 }
 
 variable "role_name" {
-  type = string
+  type        = string
   description = "The role that should be applied"
-}
-
-variable "iam_instance_profile" {
-  type = string
-  description = "The name of the IAM Profile to utilize"
 }
