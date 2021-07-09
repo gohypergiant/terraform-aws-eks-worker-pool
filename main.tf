@@ -8,6 +8,7 @@ module "nodepools" {
   gpu_enabled                 = var.gpu_enabled
   cluster_name                = var.cluster_name
   min_size                    = var.min_size
+  desired_capacity            = var.desired_capacity
   max_size                    = var.max_size
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.key_name

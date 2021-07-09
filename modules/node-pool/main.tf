@@ -58,7 +58,7 @@ module "nodepool-asg" {
   health_check_type           = "EC2"
   min_size                    = var.min_size
   max_size                    = var.max_size
-  desired_capacity            = var.max_size // Set equal to max_size so we don't scale down instances in use
+  desired_capacity            = var.desired_capacity
   wait_for_capacity_timeout   = 0
   associate_public_ip_address = var.associate_public_ip_address
   key_name                    = var.key_name
