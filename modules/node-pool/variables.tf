@@ -80,3 +80,9 @@ variable "role_name" {
   type        = string
   description = "The role that should be applied"
 }
+
+variable "tags" {
+  type        = map(string)
+  description = "Tags to apply to the node pool"
+  default     = {}
+}
