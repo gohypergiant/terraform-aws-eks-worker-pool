@@ -42,7 +42,7 @@ locals {
       value               = "true"
       propagate_at_launch = false
     },
-  ] : {}
+  ] : []
 
   cluster_autoscaler_gpu_tags = var.gpu_enabled ? {
     key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
