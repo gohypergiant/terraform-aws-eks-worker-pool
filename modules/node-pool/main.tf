@@ -31,11 +31,18 @@ locals {
     propagate_at_launch = true
   }
 
-  cluster_autoscaler_tags = var.cluster_autoscaler ? {
-    key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
-    value               = "owned"
-    propagate_at_launch = true
-  } : {}
+  cluster_autoscaler_tags = var.cluster_autoscaler ? [
+    {
+      key                 = "k8s.io/cluster-autoscaler/${data.aws_eks_cluster.this.id}"
+      value               = "owned"
+      propagate_at_launch = true
+    },
+    {
+      key                 = "k8s.io/cluster-autoscaler/enabled"
+      value               = "true"
+      propagate_at_launch = false
+    },
+  ] : {}
 
   cluster_autoscaler_gpu_tags = var.gpu_enabled ? {
     key                 = "k8s.io/cluster-autoscaler/node-template/gpu-enabled"
