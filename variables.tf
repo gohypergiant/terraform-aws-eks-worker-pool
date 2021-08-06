@@ -84,7 +84,7 @@ variable "role_name" {
 }
 
 variable "tags" {
-  type        = map(string)
+  type        = list(map(string))
   description = "Tags to apply to the node pool"
-  default     = {}
+  default     = []
 }

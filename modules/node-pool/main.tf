@@ -1,7 +1,8 @@
 data "aws_ssm_parameter" "eks_ami" {
   name = var.gpu_enabled ? (
+    "/aws/service/eks/optimized-ami/${data.aws_eks_cluster.this.version}/amazon-linux-2-gpu/recommended/image_id") : (
     "/aws/service/eks/optimized-ami/${data.aws_eks_cluster.this.version}/amazon-linux-2/recommended/image_id"
-  ) : ("/aws/service/eks/optimized-ami/${data.aws_eks_cluster.this.version}/amazon-linux-2-gpu/recommended/image_id")
+  )
 }
 
 data "aws_subnet" "this" {
