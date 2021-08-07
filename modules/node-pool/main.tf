@@ -14,10 +14,17 @@ data "aws_eks_cluster" "this" {
 }
 
 locals {
-  user_data = <<EOF
+  base_labels = [
+    "eks.amazonaws.com/nodegroup-image=${data.aws_ssm_parameter.eks_ami.value}",
+    "${var.name}-az=${data.aws_subnet.this.availability_zone},"
+  ]
+  all_labels = join(",", concat(local.base_labels, var.k8s_labels))
+  user_data  = <<EOF
     #!/bin/bash
     set -o xtrace
-    /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup-image=${data.aws_ssm_parameter.eks_ami.value},${var.name}-az=${data.aws_subnet.this.availability_zone}'
+    /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} \
+    --kubelet-extra-args \
+    '--node-labels=${local.all_labels}'
     EOF
 
   cluster_id = {
@@ -41,7 +48,7 @@ locals {
     {
       key                 = "k8s.io/cluster-autoscaler/enabled"
       value               = "true"
-      propagate_at_launch = false
+      propagate_at_launch = true
     },
   ] : []
 
@@ -59,7 +66,7 @@ resource "aws_iam_instance_profile" "this" {
 
 module "nodepool-asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "~> 4.4.0"
+  version = "4.4.0"
 
   # Auto scaling group
   vpc_zone_identifier         = toset([data.aws_subnet.this.id])

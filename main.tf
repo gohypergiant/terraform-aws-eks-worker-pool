@@ -20,4 +20,5 @@ module "nodepools" {
   cluster_autoscaler          = var.cluster_autoscaler
   role_name                   = var.role_name
   tags                        = var.tags
+  k8s_labels                  = var.k8s_labels
 }
