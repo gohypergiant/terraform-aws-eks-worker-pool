@@ -19,13 +19,24 @@ locals {
     "${var.name}-az=${data.aws_subnet.this.availability_zone},"
   ]
   all_labels = join(",", concat(local.base_labels, var.k8s_labels))
-  user_data  = <<EOF
+  user_data = var.k8s_taints != [] ? ( // if taint argument is provided, include argument in user_data. else, don't.
+    <<EOF
+    #!/bin/bash
+    set -o xtrace
+    /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} \
+    --kubelet-extra-args \
+    '--node-labels=${local.all_labels} \
+    --register-with-taints=${join(",", var.k8s_taints)}'
+    EOF
+    ) : ( // HEREDOC must be on its own line
+    <<EOF
     #!/bin/bash
     set -o xtrace
     /etc/eks/bootstrap.sh ${data.aws_eks_cluster.this.id} \
     --kubelet-extra-args \
     '--node-labels=${local.all_labels}'
     EOF
+  )
 
   cluster_id = {
     key                 = "kubernetes.io/cluster/${data.aws_eks_cluster.this.id}"
