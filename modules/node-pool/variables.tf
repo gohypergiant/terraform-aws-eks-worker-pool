@@ -86,3 +86,9 @@ variable "tags" {
   description = "Tags to apply to the node pool"
   default     = []
 }
+
+variable "k8s_labels" {
+  type        = list(string)
+  description = "Extra labels to apply to Kubernetes workers"
+  default     = []
+}
