@@ -91,6 +91,12 @@ variable "tags" {
 
 variable "k8s_labels" {
   type        = list(string)
-  description = "Extra labels to apply to Kubernetes workers"
+  description = "Extra labels to apply to EKS workers"
+  default     = []
+}
+
+variable "k8s_taints" {
+  type        = list(string)
+  description = "Node taints to apply to EKS workers"
   default     = []
 }
