@@ -76,8 +76,8 @@ resource "aws_iam_instance_profile" "this" {
 }
 
 module "nodepool-asg" {
-  source  = "terraform-aws-modules/autoscaling/aws"
-  version = "4.4.0"
+  source  = "bbriggs/autoscaling/aws"
+  version = "4.9.0"
 
   # Auto scaling group
   vpc_zone_identifier         = toset([data.aws_subnet.this.id])
