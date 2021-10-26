@@ -77,7 +77,7 @@ resource "aws_iam_instance_profile" "this" {
 
 module "nodepool-asg" {
   source  = "bbriggs/autoscaling/aws"
-  version = "4.9.0"
+  version = "4.9.1"
 
   # Auto scaling group
   vpc_zone_identifier         = toset([data.aws_subnet.this.id])
