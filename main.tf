@@ -21,4 +21,5 @@ module "nodepools" {
   role_name                   = var.role_name
   tags                        = var.tags
   k8s_labels                  = var.k8s_labels
+  k8s_taints                  = var.k8s_taints
 }
